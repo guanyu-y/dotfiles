@@ -1,0 +1,14 @@
+# Environment variables with secrets
+nvim.env
+*.env
+
+# lazy.nvim lock file
+lazy-lock.json
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# Undo history
+undo/

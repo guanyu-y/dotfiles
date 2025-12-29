@@ -1,0 +1,12 @@
+# Local Git configuration (not tracked by dotfiles)
+# Copy this file to ~/.gitconfig.local and configure your values
+
+[user]
+	name = Your Name
+	email = your.email@example.com
+
+# Proxy settings (uncomment and configure if needed)
+# [http]
+# 	proxy = http://your-proxy:port
+# [https]
+# 	proxy = http://your-proxy:port

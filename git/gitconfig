@@ -1,0 +1,15 @@
+# Git configuration
+# User info and proxy settings should be configured in ~/.gitconfig.local
+
+[include]
+	path = ~/.gitconfig.local
+
+[core]
+	editor = vim -c "set fenc=utf-8"
+	pager = less
+
+[credential]
+	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
+
+[alias]
+	lg = log --graph --all --decorate --oneline
