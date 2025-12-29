@@ -1,0 +1,4 @@
+#!/bin/bash
+
+battery=$(powershell.exe -Command "(Get-WmiObject Win32_Battery).EstimatedChargeRemaining" | tr -d '\r')
+echo "$battery"

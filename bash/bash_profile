@@ -1,0 +1,17 @@
+
+# >>> coursier install directory >>>
+export PATH="$PATH:$HOME/.local/share/coursier/bin"
+# <<< coursier install directory <<<
+
+
+# Added by Toolbox App
+export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
+
+# Load .bashrc
+if [[ -f ~/.bashrc ]] ; then
+     . ~/.bashrc
+fi
+
+# Locale
+export LANG=ja_JP.UTF-8
+export LC_TIME=ja_JP.UTF-8

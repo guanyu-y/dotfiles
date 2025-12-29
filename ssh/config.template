@@ -1,0 +1,27 @@
+# SSH Config Template
+# Copy this file to ~/.ssh/config and configure as needed
+
+Host github.com
+  User git
+  Port 22
+  HostName github.com
+  IdentityFile ~/.ssh/github
+  TCPKeepAlive yes
+  IdentitiesOnly yes
+  # ProxyCommand /path/to/connect -H your-proxy:port %h %p
+  AddressFamily inet
+
+Host ssh.github.com
+  User git
+  Port 443
+  Hostname ssh.github.com
+  IdentityFile ~/.ssh/github
+  TCPKeepAlive yes
+  IdentitiesOnly yes
+
+Host bitbucket.org
+  User git
+  IdentityFile ~/.ssh/id_rsa
+  HostName altssh.bitbucket.org
+  Port 443
+  # ProxyCommand connect.exe -H your-proxy:port %h %p
