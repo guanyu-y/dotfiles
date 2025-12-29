@@ -24,6 +24,9 @@ dotfiles/
 │   └── gitconfig.local.template
 ├── ssh/                    # SSH設定テンプレート
 │   └── config.template
+├── docs/                   # リファレンス
+│   ├── nvim-reference.md
+│   └── tmux-reference.md
 ├── install.sh
 └── README.md
 ```
@@ -36,6 +39,14 @@ cd dotfiles
 ./install.sh
 ```
 
+個別インストール:
+
+```bash
+./install.sh nvim      # Neovimのみ
+./install.sh tmux bash # tmuxとbashのみ
+./install.sh -h        # ヘルプ
+```
+
 ## 環境変数の設定
 
 インストール後、`~/.env.local` を編集して環境変数を設定してください：
@@ -46,10 +57,6 @@ cd dotfiles
 # Proxy settings
 export HTTP_PROXY=http://your-proxy:port
 export HTTPS_PROXY=http://your-proxy:port
-
-# User info
-export GIT_USER_NAME="Your Name"
-export GIT_USER_EMAIL="your.email@example.com"
 
 # Windows integration (WSL)
 export WINDOWS_USER="your_windows_username"
@@ -82,36 +89,16 @@ sudo apt install ripgrep fd-find
 sudo apt install tmux neovim
 ```
 
-## 主要なキーバインド
+## リファレンス
 
-### Neovim (リーダーキー: `,`)
-
-| キー | 動作 |
-| ---- | ---- |
-| `<C-t>` | NvimTreeトグル |
-| `<C-f>` | ファイル検索 (Telescope) |
-| `<C-g>` | テキスト検索 (Telescope) |
-| `<leader>cc` | Claude Code トグル |
-| `<leader>/` | コメントトグル |
-| `<leader>s` | 横分割 |
-| `<leader>v` | 縦分割 |
-| `<leader>y` | クリップボードにコピー |
-| `gh/gj/gk/gl` | ペイン移動 |
-
-### tmux (Prefix: `Ctrl-j`)
-
-| キー | 動作 |
-| ---- | ---- |
-| `Prefix + s` | 横分割 |
-| `Prefix + v` | 縦分割 |
-| `Prefix + h/j/k/l` | ペイン移動 |
-| `Prefix + r` | 設定リロード |
+- [Neovim / NvimTree キーバインド](docs/nvim-reference.md)
+- [tmux キーバインド](docs/tmux-reference.md)
 
 ## ファイル構成
 
-| ファイル | 説明 | 追跡 |
-| -------- | ---- | ---- |
-| `~/.env.local` | 環境変数 (プロキシ、APIキー等) | No |
-| `~/.gitconfig.local` | Git個人設定 (名前、メール、プロキシ) | No |
-| `~/.ssh/config` | SSH設定 | No |
-| `nvim/nvim.env` | Neovim用APIキー | No |
+| ファイル             | 説明                                 | 追跡 |
+| -------------------- | ------------------------------------ | ---- |
+| `~/.env.local`       | 環境変数 (プロキシ、APIキー等)       | No   |
+| `~/.gitconfig.local` | Git個人設定 (名前、メール、プロキシ) | No   |
+| `~/.ssh/config`      | SSH設定                              | No   |
+| `nvim/nvim.env`      | Neovim用APIキー                      | No   |
