@@ -24,6 +24,8 @@ dotfiles/
 │   └── gitconfig.local.template
 ├── ssh/                    # SSH設定テンプレート
 │   └── config.template
+├── fzf/                    # fzf設定
+│   └── fzf.bash
 ├── docs/                   # リファレンス
 │   ├── nvim-reference.md
 │   └── tmux-reference.md
@@ -44,6 +46,7 @@ cd dotfiles
 ```bash
 ./install.sh nvim      # Neovimのみ
 ./install.sh tmux bash # tmuxとbashのみ
+./install.sh fzf       # fzfのみ
 ./install.sh -h        # ヘルプ
 ```
 
@@ -82,8 +85,12 @@ export OPENAI_API_KEY="your-api-key"
 ## 必要なツール
 
 ```bash
-# Neovim用
+# Neovim / fzf用
 sudo apt install ripgrep fd-find
+
+# fzf (fuzzy finder)
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
 
 # その他
 sudo apt install tmux neovim

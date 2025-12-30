@@ -83,6 +83,46 @@ install_ssh() {
     echo "  Run: cp $DOTFILES_DIR/ssh/config.template ~/.ssh/config"
 }
 
+install_fzf() {
+    echo -e "${GREEN}[fzf]${NC} Installing fzf..."
+
+    # Install fzf if not installed
+    if ! command -v fzf &> /dev/null; then
+        read -p "  fzf is not installed. Install now? [y/N] " answer
+        if [[ "$answer" =~ ^[Yy]$ ]]; then
+            if [ ! -d ~/.fzf ]; then
+                echo "  Cloning fzf..."
+                git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+            fi
+            echo "  Running fzf installer..."
+            ~/.fzf/install --key-bindings --completion --no-update-rc --no-bash --no-zsh --no-fish
+        else
+            echo "  Skipped fzf installation"
+        fi
+    else
+        echo "  fzf already installed"
+    fi
+
+    # Install zoxide if not installed
+    if ! command -v zoxide &> /dev/null; then
+        read -p "  zoxide is not installed. Install now? [y/N] " answer
+        if [[ "$answer" =~ ^[Yy]$ ]]; then
+            echo "  Installing zoxide..."
+            curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+        else
+            echo "  Skipped zoxide installation"
+        fi
+    else
+        echo "  zoxide already installed"
+    fi
+
+    # Link config
+    mkdir -p ~/.config/fzf
+    backup_if_exists ~/.config/fzf/fzf.bash
+    ln -sf "$DOTFILES_DIR/fzf/fzf.bash" ~/.config/fzf/fzf.bash
+    echo "  Linked: ~/.config/fzf/fzf.bash"
+}
+
 check_tools() {
     echo -e "${GREEN}[check]${NC} Checking required tools..."
     local missing=0
@@ -98,6 +138,8 @@ check_tools() {
     check_tool "tmux" "sudo apt install tmux"
     check_tool "rg" "sudo apt install ripgrep"
     check_tool "fdfind" "sudo apt install fd-find"
+    check_tool "fzf" "git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install"
+    check_tool "zoxide" "curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh"
     return $missing
 }
 
@@ -110,6 +152,7 @@ show_help() {
     echo "  bash    Bash configuration (bashrc, bash_profile, bash_aliases, env)"
     echo "  git     Git configuration"
     echo "  ssh     SSH configuration template"
+    echo "  fzf     fzf configuration"
     echo "  check   Check required tools"
     echo "  all     Install all components (default)"
     echo ""
@@ -146,6 +189,7 @@ for component in $components; do
         bash)  install_bash ;;
         git)   install_git ;;
         ssh)   install_ssh ;;
+        fzf)   install_fzf ;;
         check) check_tools ;;
         all)
             install_nvim
@@ -153,6 +197,7 @@ for component in $components; do
             install_bash
             install_git
             install_ssh
+            install_fzf
             check_tools
             ;;
         *)

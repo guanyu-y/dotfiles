@@ -111,23 +111,26 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # enhancd
 [ -f /usr/local/src/enhancd/init.sh ] && source /usr/local/src/enhancd/init.sh
 
-# Fuzzy Finder
+# Fuzzy Finder (fzf)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# Zoxide
-command -v zoxide &> /dev/null && eval "$(zoxide init bash)"
+[ -f ~/.config/fzf/fzf.bash ] && source ~/.config/fzf/fzf.bash
 
 # Zoxide + fzf integration
-z() {
-  local base dir
-  if [ "$1" ]; then
-    base=$(realpath "$1")
-  else
-    base="$PWD"
-  fi
-  dir=$(zoxide query -l | grep "^$base" | fzf --prompt="z (in $base)> " --height=40% --reverse)
-  [ -n "$dir" ] && cd "$dir"
-}
+if command -v zoxide &> /dev/null; then
+    eval "$(zoxide init bash)"
+    if command -v fzf &> /dev/null; then
+        z() {
+            local base dir
+            if [ "$1" ]; then
+                base=$(realpath "$1")
+            else
+                base="$PWD"
+            fi
+            dir=$(zoxide query -l | grep "^$base" | fzf --prompt="z (in $base)> " --height=40% --reverse)
+            [ -n "$dir" ] && cd "$dir"
+        }
+    fi
+fi
 
 # Conda
 if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
