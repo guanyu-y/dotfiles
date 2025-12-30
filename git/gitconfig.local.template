@@ -10,3 +10,12 @@
 # 	proxy = http://your-proxy:port
 # [https]
 # 	proxy = http://your-proxy:port
+
+# Multiple GitHub accounts
+# Set username per host to use different credentials
+[credential "https://github.com"]
+	username = your-github-username
+
+# Enterprise GitHub (uncomment and configure if needed)
+# [credential "https://github.example.com"]
+# 	username = your-enterprise-username
