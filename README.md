@@ -101,11 +101,13 @@ sudo apt install tmux neovim
 - [Neovim / NvimTree キーバインド](docs/nvim-reference.md)
 - [tmux キーバインド](docs/tmux-reference.md)
 
-## ファイル構成
+## ローカル設定ファイル（Git管理外）
 
-| ファイル             | 説明                                 | 追跡 |
-| -------------------- | ------------------------------------ | ---- |
-| `~/.env.local`       | 環境変数 (プロキシ、APIキー等)       | No   |
-| `~/.gitconfig.local` | Git個人設定 (名前、メール、プロキシ) | No   |
-| `~/.ssh/config`      | SSH設定                              | No   |
-| `nvim/nvim.env`      | Neovim用APIキー                      | No   |
+以下のファイルは個人設定用のため、テンプレートからコピーして編集してください。
+
+| ファイル             | テンプレート                      | 説明                           |
+| -------------------- | --------------------------------- | ------------------------------ |
+| `~/.env.local`       | `bash/env.template`               | 環境変数 (プロキシ、APIキー等) |
+| `~/.gitconfig.local` | `git/gitconfig.local.template`    | Git個人設定 (名前、メール等)   |
+| `~/.ssh/config`      | `ssh/config.template`             | SSH設定                        |
+| `nvim/nvim.env`      | `nvim/nvim.env.template`          | Neovim用APIキー                |
