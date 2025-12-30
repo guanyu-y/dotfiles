@@ -1,5 +1,5 @@
-# Git configuration
-# User info and proxy settings should be configured in ~/.gitconfig.local
+# Git設定
+# ユーザー情報やプロキシは ~/.gitconfig.local に設定
 
 [include]
 	path = ~/.gitconfig.local
@@ -7,9 +7,40 @@
 [core]
 	editor = vim -c "set fenc=utf-8"
 	pager = less
+	autocrlf = input      # チェックアウト時はそのまま、コミット時はLFに変換
+	ignorecase = false    # ファイル名の大文字小文字を区別
+
+[init]
+	defaultBranch = main  # 新規リポジトリのデフォルトブランチ
+
+[pull]
+	rebase = false        # pullでマージ（rebaseしない）
+
+[push]
+	default = current           # 現在のブランチ名でpush
+	autoSetupRemote = true      # 初回pushで自動的にupstream設定
+
+[fetch]
+	prune = true          # 削除されたリモートブランチをローカルからも削除
+
+[diff]
+	colorMoved = default  # 移動したコードを色分け表示
+
+[merge]
+	conflictstyle = diff3 # コンフリクト時に元の内容(BASE)も表示
 
 [credential]
+	# Windows Git Credential Manager (WSL連携)
 	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
 
 [alias]
-	lg = log --graph --all --decorate --oneline
+	lg = log --graph --all --decorate --oneline  # グラフ表示のログ
+	st = status -sb       # 短縮ステータス
+	co = checkout
+	br = branch
+	cm = commit
+	df = diff             # 変更 vs ステージ (ワーキングツリーの未ステージ変更)
+	dfs = diff --staged   # HEAD vs ステージ (コミット予定の変更)
+	dfh = diff HEAD       # HEAD vs 変更+ステージ (HEADからの全変更)
+	last = log -1 HEAD    # 最新コミットを表示
+	undo = reset --soft HEAD^   # 直前のコミットを取り消し（変更は保持）
